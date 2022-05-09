@@ -1,0 +1,198 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Css para la pagina actual -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+ 
+
+
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+           <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">   
+                <!--  navbar links alineados a la derecha -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter">
+                        CARGAR GASTOS
+                    </button>
+                
+                </ul>
+            </nav>
+            <hr>
+                    <form action="/buscar"class="form-inline" method="GET">
+                        <div class="form-group mb-2">                            
+                            <input type="text" readonly class="form-control-plaintext" value="buscar gastos">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">                            
+                            <input type="text" class="form-control" id="gasto" placeholder="alquiler" name="gasto">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">BUSCAR</button>
+                    </form>
+                    <hr>
+           
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h3 class="m-b-10">Gastos</h3>
+                                
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Gastos</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Contenido principal ] start -->
+                    
+                    <!--[ Cards ] start-->
+                    <div class="row">
+                        
+                        <!--[ Gastos mensuales] starts-->
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card Monthly-sales">
+                                <div class="card-block">
+                                    <h6 class="mb-4">Gastos mensuales</h6>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-9">
+                                            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>${{gastos_mensuales_total}}</h3>
+                                        </div>                                       
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--[ Gastos mensuales ] end-->
+                        <!--[Gastos anuales ] starts-->
+                        <div class="col-md-12 col-xl-4">
+                            <div class="card yearly-sales">
+                                <div class="card-block">
+                                    <h6 class="mb-4">Gastos anuales</h6>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-9">
+                                            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>${{gastos_anual_total}}</h3>
+                                        </div>                                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--[ gastos anuales ] end-->
+                        
+                    </div>
+                    <!-- [ Cards ] end -->
+                   
+
+                     <!--[ tabla tab ] start-->
+                    <div class="col-xl-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            
+                            
+                            <li class="nav-item">
+                               Gastos mensuales
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                           
+                           
+                            
+                          
+                            <!-- [ tab mes] --> 
+                            
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <th>Nota</th>
+                                            <th>Fecha</th>
+                                            <th>tipo</th>
+                                            <th class="text-right"> importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for gasto in gastos_mensuales %}                                             
+                                            
+                                        <tr>
+                                            <td>
+                                                <h6 class="m-0">{{gasto.categoria}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{gasto.nota}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{gasto.fecha_de_pago}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{gasto.categoria.get_tipo_de_gasto_display}}</h6>
+                                            </td>
+                                            <td class="text-right">
+                                                <h6 class="m-0 ">{{gasto.importe}} </h6>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- [ tabla tab ] end -->
+
+                    <!-- [ Contenido principal ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <!--Modal Form cargar gastos-->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Carga de Gastos</h5>            
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" class="post-form">{% csrf_token %}
+              {{ form.as_p}}
+                            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %} 
+
+
+<!--  JS para esta pagina  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

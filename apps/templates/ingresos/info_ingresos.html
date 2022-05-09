@@ -1,0 +1,188 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Css para esta pagina -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+ 
+
+
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+                    <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                
+
+
+                <!-- navbar links alineados a la derecha -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter">
+                        CARGAR INGRESOS
+                    </button>
+                
+                </ul>
+            </nav>
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h3 class="m-b-10">Ingresos</h3>
+                                
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Ingresos</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Contenido principal ] start -->
+                    
+                    <!--[ Cards ] start-->
+                    <div class="row">
+                        
+                        <!--[ Ingresos mensuales] starts-->
+                        <div class="col-md-6 col-xl-4">
+                            <div class="card Monthly-sales">
+                                <div class="card-block">
+                                    <h6 class="mb-4">Ingresos mensuales</h6>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-9">
+                                            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>${{ingresos_mensuales_total}}</h3>
+                                        </div>                                       
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--[ Ingresos mensuales ] end-->
+                        <!--[Ingresos anuales ] starts-->
+                        <div class="col-md-12 col-xl-4">
+                            <div class="card yearly-sales">
+                                <div class="card-block">
+                                    <h6 class="mb-4">Ingresos anuales</h6>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-9">
+                                            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>${{ingresos_anual_total}}</h3>
+                                        </div>                                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--[ Ingresos anuales ] end-->
+                        
+                    </div>
+                    <!-- [ Cards ] end -->
+
+                     <!--[ tabla tab ] start-->
+                     <div class="col-xl-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            
+                            
+                            <li class="nav-item">
+                               Ingresos mensuales
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                           
+                           
+                            
+                          
+                            <!-- [ tab mes] --> 
+                            
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>nombre</th>
+                                            <th>Nota</th>
+                                            <th>Fecha</th>
+                                            <th>cuenta</th>
+                                            <th class="text-right"> importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ingreso in ingresos_mensuales %}                                             
+                                            
+                                        <tr>
+                                            <td>
+                                                <h6 class="m-0">{{ingreso.name}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{ingreso.nota}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{ingreso.fecha_de_ingreso}}</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="m-0">{{ingreso.cuenta}}</h6>
+                                            </td>
+                                            <td class="text-right">
+                                                <h6 class="m-0 ">{{ingreso.importe}} </h6>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- [ tabla tab ] end -->
+
+                    <!-- [ Contenido principal ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+  
+
+       <!--Modal Form cargar gastos-->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Carga de Ingresos</h5>            
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" class="post-form">{% csrf_token %}
+            {{form.as_p}}
+                            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %} 
+
+
+<!-- Js para esta pagina  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

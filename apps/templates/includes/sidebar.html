@@ -1,0 +1,61 @@
+
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a target="_blank" 
+                   href="#" class="b-brand">
+                    <div class="b-bg">
+                        <i class="feather icon-trending-up"></i>
+                    </div>
+                    <span class="b-title">Diogenes </span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    
+                   
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Menu</label>
+                    </li>
+                    <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+                        <a href="/" class="nav-link "><span class="pcoded-micon">
+                            <i class="feather icon-home"></i>
+                        </span><span class="pcoded-mtext">Dashboard</span></a>
+                    </li>
+
+                     
+                    <li class="nav-item {% if request.path == '/info_gastos' %} active {% endif %}">
+                        <a href="{% url 'info_gastos' %}" class="nav-link "><span class="pcoded-micon">
+                            <i class="feather icon-trending-down"></i>
+                        </span><span class="pcoded-mtext">Gastos</span></a>
+                    </li>
+
+                    <li class="nav-item {% if request.path == '/info_ingresos' %} active {% endif %}">
+                        <a href="{% url 'info_ingresos' %}" class="nav-link "><span class="pcoded-micon">
+                            <i class="feather icon-trending-up"></i>
+                        </span><span class="pcoded-mtext">Ingresos</span></a>
+                    </li>
+
+                    <li class="nav-item {% if request.path == '/estadisticas' %} active {% endif %}">
+                        <a href="#" class="nav-link "><span class="pcoded-micon">
+                            <i class="feather icon-pie-chart"></i>
+                        </span><span class="pcoded-mtext">Estadisticas</span></a>
+                    </li> 
+                    
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Configuración</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-settings"></i></span><span class="pcoded-mtext">Configuración</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'categoria_gastos' %}" class="">Categorias de Gastos</a></li>
+                            <li class=""><a href="{% url 'cuentas' %}" class="">Cuentas</a></li>                            
+                        </ul>
+                    </li>
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>

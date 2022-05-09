@@ -1,0 +1,73 @@
+ 
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Css para la pagina actual -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+ <div class="main-body">
+    <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ basic-table ] start -->
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Resultado de la busqueda</h5>
+                        <span class="d-block m-t-5">busqueda por campo "Nota": {{busqueda}}{{mensaje}}</span>
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Importe</th>
+                                        <th>Nota</th>
+                                        <th>Fecha de pago</th>
+                                        <th>Categoria</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                            {% for gasto in gastos %}
+                                            <tr>
+                                                <th scope="row">{{gasto.importe}}</th>
+                                                <td>{{gasto.nota}}</td>
+                                                <td>{{gasto.fecha_de_pago}}</td>
+                                                <td>{{gasto.categoria.get_tipo_de_gasto_display}}</td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                                
+                                                <th scope="row">No hay coincidencias con tu busqueda</th>
+                                                
+                                                
+                                            </tr>
+
+                                            {% endfor %}
+                                                                       
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ basic-table ] end -->
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 
+
+
+<!--  JS para esta pagina  -->
+{% block javascripts %}
+
+{% endblock javascripts %}
