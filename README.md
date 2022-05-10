@@ -10,6 +10,16 @@
 - Formularios de carga
 - Formulario de busqueda
 
+>Funcionamiento
+La aplicación sirve en esta primera instancia para cargar gastos e ingresos como manera de control.
+Los Gastos estan categorizados en tres tipos:
+- Fijos
+- Necesarios
+- Prescindibles
+
+Con esa informacion se puede saber los porcentajes de gastos segun categorias
+
+
 
 <br />
 
@@ -23,6 +33,7 @@ pip3 install -r requirements.txt
 
 # Crear tablas y migrar
 python manage.py makemigrations
+
 python manage.py migrate
 
 # iniciar el servidor en modo debug
